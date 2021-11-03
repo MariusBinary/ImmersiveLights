@@ -1,0 +1,19 @@
+﻿<Window x:Class="ImmersiveLights.Pages.VirtualScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="Immersive Lights - Virtual Screen" Height="500" Width="800" ResizeMode="NoResize" 
+        WindowStartupLocation="CenterScreen" Topmost="True" Background="Black">
+    <Grid>
+        <Viewbox Stretch="Fill">
+            <Grid >
+                <Canvas x:Name="DrawAreaH" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                <Canvas x:Name="DrawAreaV" Opacity="0.8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            </Grid>
+        </Viewbox>
+        <TextBlock Text="{StaticResource virutalScreenTitle}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="36" FontWeight="Bold" Foreground="#FF9F9F9F" />
+    </Grid>
+</Window>

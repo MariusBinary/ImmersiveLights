@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="ImmersiveLights.Pages.SystemFrame"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" d:DesignWidth="800">
+
+    <StackPanel>
+        <Border CornerRadius="16" Background="#19FFFFFF" VerticalAlignment="Top" Margin="0,0,0,0">
+            <StackPanel Orientation="Vertical" Margin="20,10" >
+                <Grid MinHeight="72">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel VerticalAlignment="Center" Margin="0,8" Grid.Column="0">
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{StaticResource settingsItemStartAtStartupTitle}" VerticalAlignment="Top" Foreground="White" FontFamily="/ImmersiveLights;component/Fonts/#Roboto Black" FontSize="20" FontWeight="Bold"/>
+                        <TextBlock Foreground="#FFA3A1A2" FontSize="16" Text="{StaticResource settingsItemStartAtStartupDescription}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                    <CheckBox x:Name="Sw_StartWithWindows" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Sw_StartWithWindows_Click" Grid.Column="2"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <Border CornerRadius="16" Background="#19FFFFFF" VerticalAlignment="Top" Margin="0,16,0,0">
+            <StackPanel Orientation="Vertical" Margin="20,10" >
+                <Grid MinHeight="72">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8" Grid.Column="0">
+                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{StaticResource settingsItemStartMinimizedTitle}" VerticalAlignment="Top" Foreground="White" FontFamily="/ImmersiveLights;component/Fonts/#Roboto Black" FontSize="20" FontWeight="Bold"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#FFA3A1A2" FontSize="16" Text="{StaticResource settingsItemStartMinimizedDescription}"/>
+                    </StackPanel>
+                    <CheckBox x:Name="Sw_StartReducedToIcon" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Sw_StartReducedToIcon_Click" Grid.Column="2"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <Border CornerRadius="16" Background="#19FFFFFF" VerticalAlignment="Top" Margin="0,16,0,0">
+            <StackPanel Orientation="Vertical" Margin="20,10" >
+                <Grid MinHeight="72">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,8" Grid.Column="0">
+                        <TextBlock TextWrapping="Wrap" Text="{StaticResource settingsItemMinimizeToTryTitle}" VerticalAlignment="Top" Foreground="White" FontFamily="/ImmersiveLights;component/Fonts/#Roboto Black" FontSize="20" FontWeight="Bold"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#FFA3A1A2" FontSize="16" Text="{StaticResource settingsItemMinimizeToTryDescription}"/>
+                    </StackPanel>
+                    <CheckBox x:Name="Sw_ReduceAsIconTry" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Sw_ReduceAsIconTry_Click" Grid.Column="2"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>

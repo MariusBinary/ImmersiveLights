@@ -1,0 +1,243 @@
+﻿<Window x:Class="ImmersiveLights.Pages.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:helpers="clr-namespace:ImmersiveLights.Helpers" 
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        mc:Ignorable="d" FontFamily="/ImmersiveLights;component/Fonts/#Roboto"
+        Closing="Window_Closing" Loaded="Window_Loaded"
+        Title="{StaticResource appTitle}" MinHeight="265" Height="720" MinWidth="526" Width="1220"
+        SizeChanged="Window_SizeChanged">
+    <Window.Resources>
+        <Style x:Key="NavRadioButton" TargetType="{x:Type RadioButton}">
+            <Style.Resources>
+                <Color x:Key="MenuRadioBackground1" A="00" R="00" G="00" B="00" />
+                <Color x:Key="MenuRadioForeground1" A="255" R="180" G="178" B="174" />
+                <Color x:Key="MenuRadioCheckedBackground1" A="255" R="77" G="77" B="77" />
+                <Color x:Key="MenuRadioCheckedForeground1" A="255" R="255" G="255" B="255" />
+            </Style.Resources>
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="true" />
+            <Setter Property="FocusVisualStyle" Value="{DynamicResource RadioButtonFocusVisual}" />
+            <Setter Property="Background" Value="#00000000"/>
+            <Setter Property="Foreground" Value="#FFB4B2AE"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6" BorderBrush="Black">
+                                <ContentPresenter Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsChecked" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="Background.Color" 
+                                                            To="{StaticResource MenuRadioCheckedBackground1}" Duration="0:0:0.15" />
+                                            <ColorAnimation Storyboard.TargetProperty="Foreground.Color" 
+                                                            To="{StaticResource MenuRadioCheckedForeground1}" Duration="0:0:0.15" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiTrigger.EnterActions>
+                                <MultiTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="Background.Color" 
+                                                            To="{StaticResource MenuRadioBackground1}" Duration="0:0:0" />
+                                            <ColorAnimation Storyboard.TargetProperty="Foreground.Color" 
+                                                            To="{StaticResource MenuRadioForeground1}" Duration="0:0:0" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiTrigger.ExitActions>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="Tab_Root">
+        <Grid.Background>
+            <ImageBrush ImageSource="/ImmersiveLights;component/Assets/bg_main.png" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*" MinWidth="280" MaxWidth="380"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!--Taskbar notification-->
+        <tb:TaskbarIcon x:Name="TBar_Icon"
+                    Visibility="Visible"
+                    ToolTipText="Immersive Lights"
+                    MenuActivation="LeftOrRightClick"   
+                    TrayMouseDoubleClick="TBar_Icon_TrayMouseDoubleClick"
+                    IconSource="/ImmersiveLights;component/logo.ico">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="Menu_Open" Header="{StaticResource notifyOpen}" Click="Menu_Open_Click"/>
+                    <MenuItem x:Name="Menu_Settings" Header="{StaticResource notifySystemSettings}" Click="Menu_Settings_Click"/>
+                    <MenuItem x:Name="Menu_CheckUpdates" Header="{StaticResource notifyCheckForUpdates}" Click="Menu_CheckUpdates_Click"/>
+                    <MenuItem x:Name="Menu_About" Header="{StaticResource sidebarAbout}" Click="Menu_About_Click"/>
+                    <Separator />
+                    <MenuItem x:Name="Menu_Ouit" Header="{StaticResource notifyClose}" Click="Menu_Ouit_Click"/>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
+
+        <!--Sidebar-->
+        <Grid x:Name="Tab_Sidebar" Background="#0FFFFFFF" >
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <StackPanel Orientation="Vertical" Margin="15,20">
+                    <RadioButton x:Name="Btn_NavHome" Style="{StaticResource NavRadioButton}" Height="56" BorderThickness="0" Click="Btn_NavHome_Click" GroupName="MainNavigationGroup">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="56"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Path Stretch="Uniform" Width="24" Height="24" Data="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RadioButton}}, Path=Foreground}"/>
+                            <TextBlock Text="{StaticResource sidebarHome}" Grid.Column="2" VerticalAlignment="Center" />
+                        </Grid>
+                    </RadioButton>
+                    <TextBlock Margin="0,10,0,8" Text="{StaticResource sidebarGeneral}" Foreground="#FFB4B2AE" FontFamily="/ImmersiveLights;component/Fonts/#Roboto Medium"/>
+                    <RadioButton x:Name="Btn_NavConnection" Style="{StaticResource NavRadioButton}" Height="56" BorderThickness="0" Click="Btn_NavConnection_Click" GroupName="MainNavigationGroup">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="56"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Path Stretch="Uniform" Width="24" Height="24" Data="M18 7h-2c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1v2h-3V5h1c.41 0 .65-.47.4-.8l-2-2.67c-.2-.27-.6-.27-.8 0l-2 2.67c-.25.33-.01.8.4.8h1v8H8v-2.07c.83-.44 1.38-1.36 1.14-2.43-.17-.77-.77-1.4-1.52-1.61C6.15 6.48 4.8 7.59 4.8 9c0 .85.5 1.56 1.2 1.93V13c0 1.1.9 2 2 2h3v3.05c-.86.45-1.39 1.42-1.13 2.49.18.75.79 1.38 1.54 1.58 1.46.39 2.8-.7 2.8-2.12 0-.85-.49-1.58-1.2-1.95V15h3c1.1 0 2-.9 2-2v-2c.55 0 1-.45 1-1V8C19 7.45 18.55 7 18 7z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RadioButton}}, Path=Foreground}"/>
+                            <TextBlock Text="{StaticResource sidebarConnection}" Grid.Column="2" VerticalAlignment="Center" />
+                        </Grid>
+                    </RadioButton>
+                    <RadioButton x:Name="Btn_NavLayout" Style="{StaticResource NavRadioButton}" Height="56" BorderThickness="0" Margin="0,5,0,0" Click="Btn_NavLayout_Click" PreviewMouseLeftButtonUp="Btn_NavLayout_PreviewMouseLeftButtonUp" GroupName="MainNavigationGroup">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="56"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Path Stretch="Uniform" Width="24" Height="24" Data="M22,6L22,6c0-0.55-0.45-1-1-1h-2V3c0-0.55-0.45-1-1-1h0c-0.55,0-1,0.45-1,1v2h-4V3c0-0.55-0.45-1-1-1h0 c-0.55,0-1,0.45-1,1v2H7V3c0-0.55-0.45-1-1-1h0C5.45,2,5,2.45,5,3v2H3C2.45,5,2,5.45,2,6v0c0,0.55,0.45,1,1,1h2v4H3 c-0.55,0-1,0.45-1,1v0c0,0.55,0.45,1,1,1h2v4H3c-0.55,0-1,0.45-1,1v0c0,0.55,0.45,1,1,1h2v2c0,0.55,0.45,1,1,1h0 c0.55,0,1-0.45,1-1v-2h4v2c0,0.55,0.45,1,1,1h0c0.55,0,1-0.45,1-1v-2h4v2c0,0.55,0.45,1,1,1h0c0.55,0,1-0.45,1-1v-2h2 c0.55,0,1-0.45,1-1v0c0-0.55-0.45-1-1-1h-2v-4h2c0.55,0,1-0.45,1-1v0c0-0.55-0.45-1-1-1h-2V7h2C21.55,7,22,6.55,22,6z M7,7h4v4H7 V7z M7,17v-4h4v4H7z M17,17h-4v-4h4V17z M17,11h-4V7h4V11z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RadioButton}}, Path=Foreground}"/>
+                            <TextBlock Text="{StaticResource sidebarArrangement}" Grid.Column="2" VerticalAlignment="Center" />
+                        </Grid>
+                    </RadioButton>
+                    <TextBlock Margin="0,20,0,8" Text="{StaticResource sidebarPreferences}" Foreground="#FFB4B2AE" FontFamily="/ImmersiveLights;component/Fonts/#Roboto Medium"/>
+                    <RadioButton x:Name="Btn_NavCorrection" Style="{StaticResource NavRadioButton}" Height="56" BorderThickness="0" Click="Btn_NavCorrection_Click" PreviewMouseLeftButtonUp="Btn_NavCorrection_PreviewMouseLeftButtonUp" GroupName="MainNavigationGroup">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="56"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Path Stretch="Uniform" Width="24" Height="24" Data="M12,4.81L12,19c-3.31,0-6-2.63-6-5.87c0-1.56,0.62-3.03,1.75-4.14L12,4.81 M6.35,7.56L6.35,7.56C4.9,8.99,4,10.96,4,13.13 C4,17.48,7.58,21,12,21c4.42,0,8-3.52,8-7.87c0-2.17-0.9-4.14-2.35-5.57l0,0L12.7,2.69c-0.39-0.38-1.01-0.38-1.4,0L6.35,7.56z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RadioButton}}, Path=Foreground}"/>
+                            <TextBlock Text="{StaticResource sidebarColorCorrection}" Grid.Column="2" VerticalAlignment="Center"  />
+                        </Grid>
+                    </RadioButton>
+                    <RadioButton x:Name="Btn_NavCapture" Style="{StaticResource NavRadioButton}" Height="56" BorderThickness="0" Margin="0,5,0,0" Click="Btn_NavCapture_Click" GroupName="MainNavigationGroup">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="56"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Path Stretch="Uniform" Width="24" Height="24" Data="M20,3H4C2.9,3,2,3.9,2,5v11c0,1.1,0.9,2,2,2h3c-0.55,0.55-1,0.87-1,1.59v0C6,20.37,6.63,21,7.41,21h9.17 c0.78,0,1.41-0.63,1.41-1.41v0c0-0.72-0.44-1.03-1-1.59h3c1.1,0,2-0.9,2-2V5C22,3.9,21.1,3,20,3z M20,16H4V5h16V16z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RadioButton}}, Path=Foreground}"/>
+                            <TextBlock Text="{StaticResource sidebarCapturePreferences}" Grid.Column="2" VerticalAlignment="Center" />
+                        </Grid>
+                    </RadioButton>
+                    <RadioButton x:Name="Btn_NavAudio" Style="{StaticResource NavRadioButton}" Height="56" BorderThickness="0" Margin="0,5,0,0" Click="Btn_NavAudio_Click" GroupName="MainNavigationGroup">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="56"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Path Stretch="Uniform" Width="24" Height="24" Data="M11.4 1.02C6.62 1.33 3 5.52 3 10.31V17c0 1.66 1.34 3 3 3h1c1.1 0 2-.9 2-2v-4c0-1.1-.9-2-2-2H5v-1.71C5 6.45 7.96 3.11 11.79 3 15.76 2.89 19 6.06 19 10v2h-2c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h1c1.66 0 3-1.34 3-3v-7c0-5.17-4.36-9.32-9.6-8.98z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RadioButton}}, Path=Foreground}"/>
+                            <TextBlock Text="{StaticResource sidebarAudioPreferences}" Grid.Column="2" VerticalAlignment="Center" />
+                        </Grid>
+                    </RadioButton>
+                    <TextBlock Margin="0,20,0,8" Text="{StaticResource sidebarOther}" Foreground="#FFB4B2AE" FontFamily="/ImmersiveLights;component/Fonts/#Roboto Medium"/>
+                    <RadioButton x:Name="Btn_NavSystem" Style="{StaticResource NavRadioButton}" Height="56" BorderThickness="0" Click="Btn_NavSystem_Click" GroupName="MainNavigationGroup">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="56"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Path Stretch="Uniform" Width="24" Height="24" Data="M18.04,7.99l-0.63-1.4l-1.4-0.63c-0.39-0.18-0.39-0.73,0-0.91l1.4-0.63l0.63-1.4c0.18-0.39,0.73-0.39,0.91,0l0.63,1.4 l1.4,0.63c0.39,0.18,0.39,0.73,0,0.91l-1.4,0.63l-0.63,1.4C18.78,8.38,18.22,8.38,18.04,7.99z M21.28,12.72L20.96,12 c-0.18-0.39-0.73-0.39-0.91,0l-0.32,0.72L19,13.04c-0.39,0.18-0.39,0.73,0,0.91l0.72,0.32L20.04,15c0.18,0.39,0.73,0.39,0.91,0 l0.32-0.72L22,13.96c0.39-0.18,0.39-0.73,0-0.91L21.28,12.72z M16.24,14.37l1.23,0.93c0.4,0.3,0.51,0.86,0.26,1.3l-1.62,2.8 c-0.25,0.44-0.79,0.62-1.25,0.42l-1.43-0.6c-0.2,0.13-0.42,0.26-0.64,0.37l-0.19,1.54c-0.06,0.5-0.49,0.88-0.99,0.88H8.38 c-0.5,0-0.93-0.38-0.99-0.88L7.2,19.59c-0.22-0.11-0.43-0.23-0.64-0.37l-1.43,0.6c-0.46,0.2-1,0.02-1.25-0.42l-1.62-2.8 c-0.25-0.44-0.14-0.99,0.26-1.3l1.23-0.93C3.75,14.25,3.75,14.12,3.75,14s0-0.25,0.01-0.37L2.53,12.7c-0.4-0.3-0.51-0.86-0.26-1.3 l1.62-2.8c0.25-0.44,0.79-0.62,1.25-0.42l1.43,0.6c0.2-0.13,0.42-0.26,0.64-0.37l0.19-1.54C7.45,6.38,7.88,6,8.38,6h3.23 c0.5,0,0.93,0.38,0.99,0.88l0.19,1.54c0.22,0.11,0.43,0.23,0.64,0.37l1.43-0.6c0.46-0.2,1-0.02,1.25,0.42l1.62,2.8 c0.25,0.44,0.14,0.99-0.26,1.3l-1.23,0.93c0.01,0.12,0.01,0.24,0.01,0.37S16.25,14.25,16.24,14.37z M13,14c0-1.66-1.34-3-3-3 s-3,1.34-3,3s1.34,3,3,3S13,15.66,13,14z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RadioButton}}, Path=Foreground}"/>
+                            <TextBlock Text="{StaticResource sidebarSystemSettings}" Grid.Column="2" VerticalAlignment="Center" />
+                        </Grid>
+                    </RadioButton>
+                    <RadioButton x:Name="Btn_NavUpdate" Style="{StaticResource NavRadioButton}" Height="56" BorderThickness="0" Margin="0,5,0,0" Click="Btn_NavUpdate_Click" GroupName="MainNavigationGroup">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="56"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Path Stretch="Uniform" Width="24" Height="24" Data="M12 6v1.79c0 .45.54.67.85.35l2.79-2.79c.2-.2.2-.51 0-.71l-2.79-2.79c-.31-.31-.85-.09-.85.36V4c-4.42 0-8 3.58-8 8 0 1.04.2 2.04.57 2.95.27.67 1.13.85 1.64.34.27-.27.38-.68.23-1.04C6.15 13.56 6 12.79 6 12c0-3.31 2.69-6 6-6zm5.79 2.71c-.27.27-.38.69-.23 1.04.28.7.44 1.46.44 2.25 0 3.31-2.69 6-6 6v-1.79c0-.45-.54-.67-.85-.35l-2.79 2.79c-.2.2-.2.51 0 .71l2.79 2.79c.31.31.85.09.85-.35V20c4.42 0 8-3.58 8-8 0-1.04-.2-2.04-.57-2.95-.27-.67-1.13-.85-1.64-.34z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RadioButton}}, Path=Foreground}"/>
+                            <TextBlock Text="{StaticResource sidebarCheckForUpdates}" Grid.Column="2" VerticalAlignment="Center" />
+                        </Grid>
+                    </RadioButton>
+                    <RadioButton x:Name="Btn_NavAbout" Style="{StaticResource NavRadioButton}" Height="56" BorderThickness="0" Margin="0,5,0,0" Click="Btn_NavAbout_Click" GroupName="MainNavigationGroup">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="56"/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Path Stretch="Uniform" Width="24" Height="24" Data="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1zm1-8h-2V7h2v2z" Fill="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type RadioButton}}, Path=Foreground}"/>
+                            <TextBlock Text="{StaticResource sidebarAbout}" Grid.Column="2" VerticalAlignment="Center" />
+                        </Grid>
+                    </RadioButton>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <!--Popup navigation menu-->
+        <Grid x:Name="Tab_Overlay" Background="#C20A0A0A" Panel.ZIndex="999" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Collapsed" MouseLeftButtonDown="Tab_Overlay_MouseLeftButtonDown"/>
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Panel.ZIndex="1000" HorizontalAlignment="Left" x:Name="Tab_PopupMenu" MinWidth="280" MaxWidth="380" Visibility="Collapsed" Background="Black" />
+
+        <!--Header-->
+        <Grid x:Name="Tab_Header" Visibility="Collapsed" Grid.Column="1" Grid.Row="0" MaxWidth="1000">
+            <TextBlock HorizontalAlignment="Left" Margin="30,18,0,0" TextWrapping="Wrap" Text="Immersive Lights" VerticalAlignment="Top" Foreground="White" FontFamily="/ImmersiveLights;component/Fonts/#Roboto Black" FontSize="20" FontWeight="Bold"/>
+            <TextBlock HorizontalAlignment="Left" Margin="30,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF9D9A95" FontFamily="/ImmersiveLights;component/Fonts/#Roboto" FontSize="14"><Run Foreground="#FF7CCC06" FontWeight="Bold" Text="Collegato"/><Run Text=" "/><Run Text="via USB"/></TextBlock>
+            <Button Height="42" Padding="25,0,25,0" Margin="0,0,20,0" VerticalAlignment="Center" HorizontalAlignment="Right" BorderThickness="0" Background="#FFE73535" Style="{DynamicResource RoundButton}" Foreground="White" Effect="{DynamicResource z-depth2}">
+                <TextBlock Text="Disconneti" Grid.Column="2" VerticalAlignment="Center" Foreground="White"/>
+            </Button>
+        </Grid>
+
+        <!--Preview-->
+        <ScrollViewer x:Name="Tab_Preview" ScrollViewer.CanContentScroll="False" Margin="0,20" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel MaxWidth="1000" HorizontalAlignment="Stretch">
+                <Grid x:Name="Tab_ContentHeader">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="Btn_NavToggle" Visibility="Collapsed" VerticalAlignment="Stretch" Background="Transparent" Style="{DynamicResource RoundButton}" Click="Btn_NavToggle_Click">
+                        <Path Width="26" Height="26" Stretch="Uniform" Data="M4 18h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zm0-5h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1s.45 1 1 1zM3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1z" Fill="#FFDC9C17"/>
+                    </Button>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1">
+                        <TextBlock x:Name="Tb_ContentTitle" Text="Title" Foreground="White" FontSize="36" FontFamily="/ImmersiveLights;component/Fonts/#Roboto Medium" Grid.Column="1"/>
+                        <Grid Height="2" Width="34" Margin="3,-2,0,0" Background="#FFDC9C17" HorizontalAlignment="Left" Grid.Column="1"/>
+                    </StackPanel>
+                    <Button x:Name="Btn_Connect" Height="42" Padding="25,0,25,0" Margin="0,0,20,0" VerticalAlignment="Center" HorizontalAlignment="Right" BorderThickness="0" Background="#FF7CCC06" Style="{DynamicResource RoundButton}" Foreground="White" Effect="{DynamicResource z-depth2}" Grid.Column="2" Click="Btn_Connect_Click">
+                        <TextBlock Text="{StaticResource connectButton}" Grid.Column="2" VerticalAlignment="Center" Foreground="White"/>
+                    </Button>
+                </Grid>
+                <helpers:AnimatedContentControl MinHeight="1" Margin="20,16" Content="{Binding FrameContent}"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

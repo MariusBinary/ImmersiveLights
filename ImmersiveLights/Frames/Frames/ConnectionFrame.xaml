@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="ImmersiveLights.Settings.ConnectionFrame"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" d:DesignWidth="800">
+
+    <StackPanel x:Name="Tab_Main">
+        <Border CornerRadius="16" Background="#19FFFFFF" MinHeight="145" VerticalAlignment="Top" Margin="0,16,0,0">
+            <StackPanel Orientation="Vertical" Margin="20,10" >
+                <Grid MinHeight="72">
+                    <StackPanel VerticalAlignment="Center" Margin="0,8">
+                        <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="{StaticResource connectionItemConnectionTypeTitle}" VerticalAlignment="Top" Foreground="White" FontFamily="/ImmersiveLights;component/Fonts/#Roboto Black" FontSize="20" FontWeight="Bold"/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,0,0,10" Foreground="#FFA3A1A2" FontSize="16" Text="{StaticResource connectionItemConnectionTypeDescription}"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Height="1" Background="#FF3F3F3F" />
+                <Grid Margin="0,16,0,10">
+                    <ComboBox x:Name="CBox_ConnectionType" Height="42" ItemsSource="{StaticResource connectionTypes}" SelectionChanged="CBox_ConnectionType_SelectionChanged"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <StackPanel x:Name="Tab_UsbConnection" >
+            <Border CornerRadius="16" Background="#19FFFFFF" MinHeight="145" VerticalAlignment="Top" Margin="0,16,0,0">
+                <StackPanel Orientation="Vertical" Margin="20,10" >
+                    <Grid MinHeight="72">
+                        <StackPanel VerticalAlignment="Center" Margin="0,8">
+                            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="{StaticResource connectionItemDeviceUsbParam1Title}" VerticalAlignment="Top" Foreground="White" FontFamily="/ImmersiveLights;component/Fonts/#Roboto Black" FontSize="20" FontWeight="Bold"/>
+                            <TextBlock TextWrapping="Wrap" Margin="0,0,0,10" Foreground="#FFA3A1A2" FontSize="16" Text="{StaticResource connectionItemDeviceUsbParam1Description}"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Height="1" Background="#FF3F3F3F" />
+                    <Grid Margin="0,16,0,10">
+                        <ComboBox x:Name="Cbox_UsbConnectionParam1" Height="42" SelectionChanged="Cbox_UsbConnectionParam1_SelectionChanged"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <Border CornerRadius="16" Background="#19FFFFFF" MinHeight="145" VerticalAlignment="Top" Margin="0,16,0,0">
+                <StackPanel Orientation="Vertical" Margin="20,10" >
+                    <Grid MinHeight="72">
+                        <StackPanel VerticalAlignment="Center" Margin="0,8">
+                            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="{StaticResource connectionItemDeviceUsbParam2Title}" VerticalAlignment="Top" Foreground="White" FontFamily="/ImmersiveLights;component/Fonts/#Roboto Black" FontSize="20" FontWeight="Bold"/>
+                            <TextBlock TextWrapping="Wrap" Margin="0,0,0,10" Foreground="#FFA3A1A2" FontSize="16" Text="{StaticResource connectionItemDeviceUsbParam2Description}"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Height="1" Background="#FF3F3F3F" />
+                    <Grid Margin="0,16,0,10">
+                        <TextBox x:Name="Tb_UsbConnectionParam2" Padding="10,0" Height="42" Background="#FF3E3E3E" BorderBrush="{x:Null}" Foreground="White" FontSize="16" VerticalContentAlignment="Center" PreviewTextInput="Tb_UsbConnectionParam2_PreviewTextInput" TextChanged="Tb_UsbConnectionParam2_TextChanged"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        <StackPanel x:Name="Tab_LanConnection" Visibility="Collapsed">
+            <Border CornerRadius="16" Background="#19FFFFFF" MinHeight="145" VerticalAlignment="Top" Margin="0,16,0,0">
+                <StackPanel Orientation="Vertical" Margin="20,10" >
+                    <Grid MinHeight="72">
+                        <StackPanel VerticalAlignment="Center" Margin="0,8">
+                            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="{StaticResource connectionItemDeviceLanParam1Title}" VerticalAlignment="Top" Foreground="White" FontFamily="/ImmersiveLights;component/Fonts/#Roboto Black" FontSize="20" FontWeight="Bold"/>
+                            <TextBlock TextWrapping="Wrap" Margin="0,0,0,10" Foreground="#FFA3A1A2" FontSize="16" Text="{StaticResource connectionItemDeviceLanParam1Description}"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Height="1" Background="#FF3F3F3F" />
+                    <Grid Margin="0,16,0,10">
+                        <TextBox x:Name="Tb_LanConnectionParam1" Padding="10,0" Height="42" Background="#FF3E3E3E" BorderBrush="{x:Null}" Foreground="White" FontSize="16" VerticalContentAlignment="Center" TextChanged="Tb_LanConnectionParam1_TextChanged"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <Border CornerRadius="16" Background="#19FFFFFF" MinHeight="145" VerticalAlignment="Top" Margin="0,16,0,0">
+                <StackPanel Orientation="Vertical" Margin="20,10" >
+                    <Grid MinHeight="72">
+                        <StackPanel VerticalAlignment="Center" Margin="0,8">
+                            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Left" Text="{StaticResource connectionItemDeviceLanParam2Title}" VerticalAlignment="Top" Foreground="White" FontFamily="/ImmersiveLights;component/Fonts/#Roboto Black" FontSize="20" FontWeight="Bold"/>
+                            <TextBlock TextWrapping="Wrap" Margin="0,0,0,10" Foreground="#FFA3A1A2" FontSize="16" Text="{StaticResource connectionItemDeviceLanParam2Description}"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Height="1" Background="#FF3F3F3F" />
+                    <Grid Margin="0,16,0,10">
+                        <TextBox x:Name="Tb_LanConnectionParam2" Padding="10,0" Height="42" Background="#FF3E3E3E" BorderBrush="{x:Null}" Foreground="White" FontSize="16" VerticalContentAlignment="Center" PreviewTextInput="Tb_LanConnectionParam2_PreviewTextInput" TextChanged="Tb_LanConnectionParam2_TextChanged"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

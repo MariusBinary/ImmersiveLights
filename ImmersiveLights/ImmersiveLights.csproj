@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7C2FBD63-87BA-4770-B4C8-8DBCB109C91F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ImmersiveLights</RootNamespace>
+    <AssemblyName>ImmersiveLights</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bass.Net, Version=2.4.12.5, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\LEDSystem\LEDSystem\bin\Debug\Bass.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct3D11.4.2.0\lib\net45\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.DXGI.4.2.0\lib\net45\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WriteableBitmapEx.Wpf, Version=1.6.7.0, Culture=neutral, PublicKeyToken=50375ca6144f1c69, processorArchitecture=MSIL">
+      <HintPath>..\packages\WriteableBitmapEx.1.6.7\lib\net40\WriteableBitmapEx.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Controls\WpfInputBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ColorCorrectionWizard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ArrangementWizard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ColorPicker\ColorPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\NumericUpDownControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\WpfMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\Frames\AudioCaptureFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\Effects\AmbilightFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\Effects\ColorFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\Effects\MusicFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\Effects\ScenesFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\Frames\HomeFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Controls\WpfInputBox.xaml.cs">
+      <DependentUpon>WpfInputBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\ColorCorrection.cs" />
+    <Compile Include="Core\ImageResizer.cs" />
+    <Compile Include="Helpers\StringToImageSourceConverter.cs" />
+    <Compile Include="Models\ColorModel.cs" />
+    <Compile Include="Models\SceneModel.cs" />
+    <Compile Include="Pages\ColorCorrectionWizard.xaml.cs">
+      <DependentUpon>ColorCorrectionWizard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ArrangementWizard.xaml.cs">
+      <DependentUpon>ArrangementWizard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ArragementZoneControl.cs" />
+    <Compile Include="Controls\NumericUpDownControl.xaml.cs">
+      <DependentUpon>NumericUpDownControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WpfMessageBox.xaml.cs">
+      <DependentUpon>WpfMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Arrangement.cs" />
+    <Compile Include="Core\Preferences.cs" />
+    <Compile Include="Core\Registry.cs" />
+    <Compile Include="Helpers\BorderClipConverter.cs" />
+    <Compile Include="Controls\ColorPicker\CirclePanel.cs" />
+    <Compile Include="Controls\ColorPicker\ColorPicker.xaml.cs">
+      <DependentUpon>ColorPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ColorPicker\ColorToSolidColorBrushConverter.cs" />
+    <Compile Include="Controls\ColorPicker\ColorUtilities.cs" />
+    <Compile Include="Controls\ColorPicker\HsvColor.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\Utils.cs" />
+    <Compile Include="Interfaces\IEffectCallback.cs" />
+    <Compile Include="Interfaces\IFrameCallback.cs" />
+    <Compile Include="Interfaces\ISerialResponse.cs" />
+    <Compile Include="Core\SafeSerialPort.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\SerialHandler.cs" />
+    <Compile Include="Core\TimerHandler.cs" />
+    <Compile Include="Controls\AnimatedContentControl.cs" />
+    <Compile Include="Interfaces\IFrameMetadata.cs" />
+    <Compile Include="Frames\Frames\AudioCaptureFrame.xaml.cs">
+      <DependentUpon>AudioCaptureFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\Effects\AmbilightFrame.xaml.cs">
+      <DependentUpon>AmbilightFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\Effects\ColorFrame.xaml.cs">
+      <DependentUpon>ColorFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\Effects\MusicFrame.xaml.cs">
+      <DependentUpon>MusicFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\Effects\ScenesFrame.xaml.cs">
+      <DependentUpon>ScenesFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\Frames\HomeFrame.xaml.cs">
+      <DependentUpon>HomeFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\RelayCommand.cs" />
+    <Compile Include="Pages\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Frames\Frames\AboutFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\Frames\ConnectionFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\Frames\ScreenCaptureFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\Frames\SystemFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Frames\Frames\UpdateFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\VirtualScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Strings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Frames\Frames\AboutFrame.xaml.cs">
+      <DependentUpon>AboutFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\Frames\ScreenCaptureFrame.xaml.cs">
+      <DependentUpon>ScreenCaptureFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\Frames\SystemFrame.xaml.cs">
+      <DependentUpon>SystemFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\Frames\UpdateFrame.xaml.cs">
+      <DependentUpon>UpdateFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Frames\Frames\ConnectionFrame.xaml.cs">
+      <DependentUpon>ConnectionFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Structures\ArrangementConfig.cs" />
+    <Compile Include="Structures\ColorCorrectionConfig.cs" />
+    <Compile Include="Pages\VirtualScreen.xaml.cs">
+      <DependentUpon>VirtualScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Core\SafeSerialPort.resx">
+      <DependentUpon>SafeSerialPort.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Resource Include="Fonts\Roboto-Black.ttf" />
+    <Resource Include="Fonts\Roboto-Bold.ttf" />
+    <Resource Include="Fonts\Roboto-Medium.ttf" />
+    <Resource Include="Fonts\Roboto-Regular.ttf" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\bg_main.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\ic_alert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\ic_add_scene.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\ic_input_scene.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,389 @@
+﻿<Window x:Class="ImmersiveLights.Pages.ArrangementWizard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:controls="clr-namespace:ImmersiveLights.Controls"
+        mc:Ignorable="d"
+        Title="Arrangement Wizard" Height="700" Width="1200" ResizeMode="NoResize" 
+        WindowStyle="None" WindowStartupLocation="CenterScreen" WindowState="Maximized" 
+        KeyDown="Window_KeyDown" Loaded="Window_Loaded">
+    <Window.Background>
+        <ImageBrush ImageSource="/ImmersiveLights;component/Assets/bg_main.png" Stretch="UniformToFill"/>
+    </Window.Background>
+    <Window.Resources>
+        <!-- Buttons -->
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#4d4b4d"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="100">
+                            <ContentPresenter Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.6" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Opacity" Value="0.7" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="Tab_Main" Opacity="1">
+        <Viewbox Stretch="Uniform">
+            <Canvas Background="Transparent" x:Name="ArrangementCanvas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                MouseMove="ArrangementCanvas_MouseMove"/>
+        </Viewbox>
+        <Border MinWidth="550" Height="390" Panel.ZIndex="99" CornerRadius="12" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="16,16,16,16" BorderBrush="#FFDC9C17">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="150"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <TextBlock x:Name="TitleSide" Text="{StaticResource navbarArrangement}" Foreground="White" FontSize="36" FontFamily="/ImmersiveLights;component/Fonts/#Roboto Medium" Grid.Column="1"/>
+                        <Grid Height="2" Width="34" Margin="3,-2,0,0" Background="#FFDC9C17" HorizontalAlignment="Left" Grid.Column="1"/>
+                    </StackPanel>
+                    <Grid>
+                        <!--General-->
+                        <Border x:Name="Tab_GeneralSection" Visibility="Visible" CornerRadius="16" Background="#19FFFFFF" MinHeight="145" VerticalAlignment="Top" Margin="0,16,0,0">
+                            <Grid Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{StaticResource arrangementLeftLEDs}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Foreground="White"></TextBlock>
+                                <controls:NumericBox Grid.Column="2" Minimum="0" Maximum="50" FixedCharacter="" Height="36" Grid.Row="0" Value="{Binding LeftLEDs}" FontSize="15"/>
+                                <TextBlock Text="{StaticResource arrangementRightLEDs}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Foreground="White"></TextBlock>
+                                <controls:NumericBox Grid.Column="2" Minimum="0" Maximum="50" FixedCharacter="" Height="36" Grid.Row="2" Value="{Binding RightLEDs}" FontSize="15"/>
+                                <TextBlock Text="{StaticResource arrangementTopLEDs}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Foreground="White"></TextBlock>
+                                <controls:NumericBox Grid.Column="2" Minimum="0" Maximum="50" FixedCharacter="" Height="36" Grid.Row="4" Value="{Binding TopLEDs}" FontSize="15"/>
+                                <TextBlock Text="{StaticResource arrangementBottomLEDs}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="6" Foreground="White"></TextBlock>
+                                <controls:NumericBox Grid.Column="2" Minimum="0" Maximum="50" FixedCharacter="" Height="36" Grid.Row="6" Value="{Binding BottomLEDs}" FontSize="15"/>
+
+                                <TextBlock Text="{StaticResource arrangementBeginEdge}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="8" Foreground="White"></TextBlock>
+                                <ComboBox Grid.Column="2" Height="36" Grid.Row="8" ItemsSource="{StaticResource arrangementBeginEdges}" SelectedIndex="{Binding BeginEdge}"/>
+                                <TextBlock Text="{StaticResource arrangementOrientation}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="10" Foreground="White"></TextBlock>
+                                <ComboBox Grid.Column="2" Height="36" Grid.Row="10" ItemsSource="{StaticResource arrangementOrientations}" SelectedIndex="{Binding Orientation}"/>
+                            </Grid>
+                        </Border>
+                        <!--Left-->
+                        <Border x:Name="Tab_LeftSection" Visibility="Hidden" CornerRadius="16" Background="#19FFFFFF" MinHeight="145" VerticalAlignment="Top" Margin="0,16,0,0">
+                            <Grid Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="8"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition Width="32"/>
+                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                 <TextBlock Text="{StaticResource arrangementTopMargin}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Foreground="White"></TextBlock>
+                                <Border CornerRadius="5" Grid.Row="0" Grid.Column="2" Background="#FF3E3E3E">
+                                    <Path Stretch="Uniform" Width="18" Height="18" Grid.Row="0" Grid.Column="2" Data="M 14.79,13 H 13 V 4 C 13,3.45 12.55,3 12,3 11.45,3 11,3.45 11,4 v 9 H 9.21 c -0.45,0 -0.67,0.54 -0.35,0.85 l 2.79,2.79 c 0.2,0.2 0.51,0.2 0.71,0 l 2.79,-2.79 C 15.46,13.54 15.24,13 14.79,13 Z M 20,20 c 0,-0.55 -0.45,-1 -1,-1 H 5 c -0.55,0 -1,0.45 -1,1 0,0.55 0.45,1 1,1 h 14 c 0.55,0 1,-0.45 1,-1 z" Fill="White"/>
+                                </Border>
+                                <controls:NumericBox Grid.Column="4" Minimum="0" Maximum="40" FixedCharacter="%" Height="36" Grid.Row="0" Value="{Binding LeftTopMargin}" FontSize="15"/>
+                                <TextBlock Text="{StaticResource arrangementBottomMargin}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Foreground="White"></TextBlock>
+                                <Border CornerRadius="5" Grid.Row="2" Grid.Column="2" Background="#FF3E3E3E">
+                                    <Path Stretch="Uniform" Width="18" Height="18" Grid.Row="2" Grid.Column="2" Data="M9.21 11H11v9c0 .55.45 1 1 1s1-.45 1-1v-9h1.79c.45 0 .67-.54.35-.85l-2.79-2.79c-.2-.2-.51-.2-.71 0l-2.79 2.79c-.31.31-.09.85.36.85zM4 4c0 .55.45 1 1 1h14c.55 0 1-.45 1-1s-.45-1-1-1H5c-.55 0-1 .45-1 1z" Fill="White"/>
+                                </Border>
+                                <controls:NumericBox Grid.Column="4" Minimum="0" Maximum="40" FixedCharacter="%" Height="36" Grid.Row="2" Value="{Binding LeftBottomMargin}" FontSize="15"/>
+                                <TextBlock Text="{StaticResource arrangementThickness}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Foreground="White"></TextBlock>
+                                <Border CornerRadius="5" Grid.Row="4" Grid.Column="2" Background="#FF3E3E3E">
+                                    <Path Stretch="Uniform" Width="18" Height="18" Grid.Row="0" Grid.Column="2" Data="M13,6.99h1.79c0.45,0,0.67-0.54,0.35-0.85l-2.79-2.78c-0.2-0.19-0.51-0.19-0.71,0L8.86,6.14C8.54,6.45,8.76,6.99,9.21,6.99 H11v10.02H9.21c-0.45,0-0.67,0.54-0.35,0.85l2.79,2.78c0.2,0.19,0.51,0.19,0.71,0l2.79-2.78c0.32-0.31,0.09-0.85-0.35-0.85H13V6.99 z" Fill="White"/>
+                                </Border>
+                                <controls:NumericBox Grid.Column="4" Minimum="0" Maximum="30" FixedCharacter="%" Height="36" Grid.Row="4" Value="{Binding LeftThickness}" FontSize="15"/>
+                                <TextBlock Text="{StaticResource arrangementEnabled}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="6" Foreground="White"></TextBlock>
+                                <CheckBox x:Name="Sw_LeftEnable" Grid.Row="6" Grid.Column="4" HorizontalAlignment="Right" IsChecked="{Binding LeftEnabled}" Click="Sw_LeftEnable_Click"/>
+                                <Border Height="1" Grid.Row="7" VerticalAlignment="Bottom" Grid.ColumnSpan="5" Background="#FF838383" />
+                                <TextBlock Grid.ColumnSpan="5" VerticalAlignment="Center" Grid.Column="0" Grid.Row="8" Foreground="#FF838383"><Run FontWeight="Bold" Text="{StaticResource arrangementTip}"/><Run Text=" "/><Run Text="{StaticResource arrangementTipContent}"/></TextBlock>
+                            </Grid>
+                        </Border>
+                        <!--Right-->
+                        <Border x:Name="Tab_RightSection" Visibility="Hidden" CornerRadius="16" Background="#19FFFFFF" MinHeight="145" VerticalAlignment="Top" Margin="0,16,0,0">
+                            <Grid Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="8"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition Width="32"/>
+                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                 <TextBlock Text="{StaticResource arrangementTopMargin}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Foreground="White"></TextBlock>
+                                <Border CornerRadius="5" Grid.Row="0" Grid.Column="2" Background="#FF3E3E3E">
+                                    <Path Stretch="Uniform" Width="18" Height="18" Grid.Row="0" Grid.Column="2" Data="M 14.79,13 H 13 V 4 C 13,3.45 12.55,3 12,3 11.45,3 11,3.45 11,4 v 9 H 9.21 c -0.45,0 -0.67,0.54 -0.35,0.85 l 2.79,2.79 c 0.2,0.2 0.51,0.2 0.71,0 l 2.79,-2.79 C 15.46,13.54 15.24,13 14.79,13 Z M 20,20 c 0,-0.55 -0.45,-1 -1,-1 H 5 c -0.55,0 -1,0.45 -1,1 0,0.55 0.45,1 1,1 h 14 c 0.55,0 1,-0.45 1,-1 z" Fill="White"/>
+                                </Border>
+                                <controls:NumericBox Grid.Column="4" Minimum="0" Maximum="40" FixedCharacter="%" Height="36" Grid.Row="0" Value="{Binding RightTopMargin}" FontSize="15"/>
+                                <TextBlock Text="{StaticResource arrangementBottomMargin}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Foreground="White"></TextBlock>
+                                <Border CornerRadius="5" Grid.Row="2" Grid.Column="2" Background="#FF3E3E3E">
+                                    <Path Stretch="Uniform" Width="18" Height="18" Grid.Row="2" Grid.Column="2" Data="M9.21 11H11v9c0 .55.45 1 1 1s1-.45 1-1v-9h1.79c.45 0 .67-.54.35-.85l-2.79-2.79c-.2-.2-.51-.2-.71 0l-2.79 2.79c-.31.31-.09.85.36.85zM4 4c0 .55.45 1 1 1h14c.55 0 1-.45 1-1s-.45-1-1-1H5c-.55 0-1 .45-1 1z" Fill="White"/>
+                                </Border>
+                                <controls:NumericBox Grid.Column="4" Minimum="0" Maximum="40" FixedCharacter="%" Height="36" Grid.Row="2" Value="{Binding RightBottomMargin}" FontSize="15"/>
+                                <TextBlock Text="{StaticResource arrangementThickness}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Foreground="White"></TextBlock>
+                                <Border CornerRadius="5" Grid.Row="4" Grid.Column="2" Background="#FF3E3E3E">
+                                    <Path Stretch="Uniform" Width="18" Height="18" Grid.Row="0" Grid.Column="2" Data="M13,6.99h1.79c0.45,0,0.67-0.54,0.35-0.85l-2.79-2.78c-0.2-0.19-0.51-0.19-0.71,0L8.86,6.14C8.54,6.45,8.76,6.99,9.21,6.99 H11v10.02H9.21c-0.45,0-0.67,0.54-0.35,0.85l2.79,2.78c0.2,0.19,0.51,0.19,0.71,0l2.79-2.78c0.32-0.31,0.09-0.85-0.35-0.85H13V6.99 z" Fill="White"/>
+                                </Border>
+                                <controls:NumericBox Grid.Column="4" Minimum="0" Maximum="30" FixedCharacter="%" Height="36" Grid.Row="4" Value="{Binding RightThickness}" FontSize="15"/>
+                                <TextBlock Text="{StaticResource arrangementEnabled}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="6" Foreground="White"></TextBlock>
+                                <CheckBox x:Name="Sw_RightEnable"  Grid.Row="6" Grid.Column="4" HorizontalAlignment="Right" IsChecked="{Binding RightEnabled}" Click="Sw_RightEnable_Click"/>
+                                <Border Height="1" Grid.Row="7" VerticalAlignment="Bottom" Grid.ColumnSpan="5" Background="#FF838383" />
+                                <TextBlock Grid.ColumnSpan="5" VerticalAlignment="Center" Grid.Column="0" Grid.Row="8" Foreground="#FF838383"><Run FontWeight="Bold" Text="{StaticResource arrangementTip}"/><Run Text=" "/><Run Text="{StaticResource arrangementTipContent}"/></TextBlock>
+                            </Grid>
+                        </Border>
+                        <!--Top-->
+                        <Border x:Name="Tab_TopSection" Visibility="Hidden" CornerRadius="16" Background="#19FFFFFF" MinHeight="145" VerticalAlignment="Top" Margin="0,16,0,0">
+                            <Grid Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="8"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition Width="32"/>
+                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{StaticResource arrangementLeftMargin}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Foreground="White"></TextBlock>
+                                <Border CornerRadius="5" Grid.Row="0" Grid.Column="2" Background="#FF3E3E3E">
+                                    <Path Stretch="Uniform" Width="18" Height="18" Grid.Row="0" Grid.Column="2" Data="M 13,9.21 V 11 H 4 c -0.55,0 -1,0.45 -1,1 0,0.55 0.45,1 1,1 h 9 v 1.79 c 0,0.45 0.54,0.67 0.85,0.35 l 2.79,-2.79 c 0.2,-0.2 0.2,-0.51 0,-0.71 L 13.85,8.85 C 13.54,8.54 13,8.76 13,9.21 Z M 20,4 c -0.55,0 -1,0.45 -1,1 v 14 c 0,0.55 0.45,1 1,1 0.55,0 1,-0.45 1,-1 V 5 C 21,4.45 20.55,4 20,4 Z" Fill="White"/>
+                                </Border>
+                                <controls:NumericBox Grid.Column="4" Minimum="0" Maximum="40" FixedCharacter="%" Height="36" Grid.Row="0" Value="{Binding TopLeftMargin}" FontSize="15"/>
+                                <TextBlock Text="{StaticResource arrangementRightMargin}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Foreground="White"></TextBlock>
+                                <Border CornerRadius="5" Grid.Row="2" Grid.Column="2" Background="#FF3E3E3E">
+                                    <Path Stretch="Uniform" Width="18" Height="18" Grid.Row="2" Grid.Column="2" Data="M 11,14.79 V 13 h 9 c 0.55,0 1,-0.45 1,-1 0,-0.55 -0.45,-1 -1,-1 H 11 V 9.21 C 11,8.76 10.46,8.54 10.15,8.86 l -2.79,2.79 c -0.2,0.2 -0.2,0.51 0,0.71 l 2.79,2.79 C 10.46,15.46 11,15.24 11,14.79 Z M 4,20 c 0.55,0 1,-0.45 1,-1 V 5 C 5,4.45 4.55,4 4,4 3.45,4 3,4.45 3,5 v 14 c 0,0.55 0.45,1 1,1 z" Fill="White"/>
+                                </Border>
+                                <controls:NumericBox Grid.Column="4" Minimum="0" Maximum="40" FixedCharacter="%" Height="36" Grid.Row="2" Value="{Binding TopRightMargin}" FontSize="15"/>
+                                <TextBlock Text="{StaticResource arrangementThickness}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Foreground="White"></TextBlock>
+                                <Border CornerRadius="5" Grid.Row="4" Grid.Column="2" Background="#FF3E3E3E">
+                                    <Path Stretch="Uniform" Width="18" Height="18" Grid.Row="0" Grid.Column="2" Data="M13,6.99h1.79c0.45,0,0.67-0.54,0.35-0.85l-2.79-2.78c-0.2-0.19-0.51-0.19-0.71,0L8.86,6.14C8.54,6.45,8.76,6.99,9.21,6.99 H11v10.02H9.21c-0.45,0-0.67,0.54-0.35,0.85l2.79,2.78c0.2,0.19,0.51,0.19,0.71,0l2.79-2.78c0.32-0.31,0.09-0.85-0.35-0.85H13V6.99 z" Fill="White"/>
+                                </Border>
+                                <controls:NumericBox Grid.Column="4" Minimum="0" Maximum="30" FixedCharacter="%" Height="36" Grid.Row="4" Value="{Binding TopThickness}" FontSize="15"/>
+                                <TextBlock Text="{StaticResource arrangementEnabled}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="6" Foreground="White"></TextBlock>
+                                <CheckBox x:Name="Sw_TopEnable"  Grid.Row="6" Grid.Column="4" HorizontalAlignment="Right" IsChecked="{Binding TopEnabled}" Click="Sw_TopEnable_Click"/>
+                                <Border Height="1" Grid.Row="7" VerticalAlignment="Bottom" Grid.ColumnSpan="5" Background="#FF838383" />
+                                <TextBlock Grid.ColumnSpan="5" VerticalAlignment="Center" Grid.Column="0" Grid.Row="8" Foreground="#FF838383"><Run FontWeight="Bold" Text="{StaticResource arrangementTip}"/><Run Text=" "/><Run Text="{StaticResource arrangementTipContent}"/></TextBlock>
+                            </Grid>
+                        </Border>
+                        <!--Bottom-->
+                        <Border x:Name="Tab_BottomSection" Visibility="Hidden" CornerRadius="16" Background="#19FFFFFF" MinHeight="145" VerticalAlignment="Top" Margin="0,16,0,0">
+                            <Grid Margin="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="2"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="8"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition Width="32"/>
+                                    <ColumnDefinition Width="2"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{StaticResource arrangementLeftMargin}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Foreground="White"></TextBlock>
+                                <Border CornerRadius="5" Grid.Row="0" Grid.Column="2" Background="#FF3E3E3E">
+                                    <Path Stretch="Uniform" Width="18" Height="18" Grid.Row="0" Grid.Column="2" Data="M 13,9.21 V 11 H 4 c -0.55,0 -1,0.45 -1,1 0,0.55 0.45,1 1,1 h 9 v 1.79 c 0,0.45 0.54,0.67 0.85,0.35 l 2.79,-2.79 c 0.2,-0.2 0.2,-0.51 0,-0.71 L 13.85,8.85 C 13.54,8.54 13,8.76 13,9.21 Z M 20,4 c -0.55,0 -1,0.45 -1,1 v 14 c 0,0.55 0.45,1 1,1 0.55,0 1,-0.45 1,-1 V 5 C 21,4.45 20.55,4 20,4 Z" Fill="White"/>
+                                </Border>
+                                <controls:NumericBox Grid.Column="4" Minimum="0" Maximum="40" FixedCharacter="%" Height="36" Grid.Row="0" Value="{Binding BottomLeftMargin}" FontSize="15"/>
+                                <TextBlock Text="{StaticResource arrangementRightMargin}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Foreground="White"></TextBlock>
+                                <Border CornerRadius="5" Grid.Row="2" Grid.Column="2" Background="#FF3E3E3E">
+                                    <Path Stretch="Uniform" Width="18" Height="18" Grid.Row="2" Grid.Column="2" Data="M 11,14.79 V 13 h 9 c 0.55,0 1,-0.45 1,-1 0,-0.55 -0.45,-1 -1,-1 H 11 V 9.21 C 11,8.76 10.46,8.54 10.15,8.86 l -2.79,2.79 c -0.2,0.2 -0.2,0.51 0,0.71 l 2.79,2.79 C 10.46,15.46 11,15.24 11,14.79 Z M 4,20 c 0.55,0 1,-0.45 1,-1 V 5 C 5,4.45 4.55,4 4,4 3.45,4 3,4.45 3,5 v 14 c 0,0.55 0.45,1 1,1 z" Fill="White"/>
+                                </Border>
+                                <controls:NumericBox Grid.Column="4" Minimum="0" Maximum="40" FixedCharacter="%" Height="36" Grid.Row="2" Value="{Binding BottomRightMargin}" FontSize="15"/>
+                                <TextBlock Text="{StaticResource arrangementThickness}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Foreground="White"></TextBlock>
+                                <Border CornerRadius="5" Grid.Row="4" Grid.Column="2" Background="#FF3E3E3E">
+                                    <Path Stretch="Uniform" Width="18" Height="18" Grid.Row="0" Grid.Column="2" Data="M13,6.99h1.79c0.45,0,0.67-0.54,0.35-0.85l-2.79-2.78c-0.2-0.19-0.51-0.19-0.71,0L8.86,6.14C8.54,6.45,8.76,6.99,9.21,6.99 H11v10.02H9.21c-0.45,0-0.67,0.54-0.35,0.85l2.79,2.78c0.2,0.19,0.51,0.19,0.71,0l2.79-2.78c0.32-0.31,0.09-0.85-0.35-0.85H13V6.99 z" Fill="White"/>
+                                </Border>
+                                <controls:NumericBox Grid.Column="4" Minimum="0" Maximum="30" FixedCharacter="%" Height="36" Grid.Row="4" Value="{Binding BottomThickness}" FontSize="15"/>
+                                <TextBlock Text="{StaticResource arrangementEnabled}" VerticalAlignment="Center" Grid.Column="0" Grid.Row="6" Foreground="White"></TextBlock>
+                                <CheckBox x:Name="Sw_BottomEnable" Grid.Row="6" Grid.Column="4" HorizontalAlignment="Right" IsChecked="{Binding BottomEnabled}" Click="Sw_BottomEnable_Click"/>
+                                <Border Height="1" Grid.Row="7" VerticalAlignment="Bottom" Grid.ColumnSpan="5" Background="#FF838383" />
+                                <TextBlock Grid.ColumnSpan="5" VerticalAlignment="Center" Grid.Column="0" Grid.Row="8" Foreground="#FF838383"><Run FontWeight="Bold" Text="{StaticResource arrangementTip}"/><Run Text=" "/><Run Text="{StaticResource arrangementTipContent}"/></TextBlock>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+                        <Button x:Name="Btn_Apply" Height="42" Padding="25,0,25,0" Margin="0,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Right" BorderThickness="0" Background="Gainsboro" Style="{DynamicResource RoundButton}" Foreground="Black" Effect="{DynamicResource z-depth2}" Grid.Column="2" Click="Btn_Apply_Click">
+                            <TextBlock Text="{StaticResource arrangementApplyButton}" Grid.Column="2" VerticalAlignment="Center" Foreground="Black"/>
+                        </Button>
+                        <Button x:Name="Btn_Save" Height="42" Padding="25,0,25,0" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right" BorderThickness="0" Background="#FFDC9C17" Style="{DynamicResource RoundButton}" Foreground="Black" Effect="{DynamicResource z-depth2}" Grid.Column="2" Click="Btn_Save_Click">
+                            <TextBlock Text="{StaticResource arrangementSaveButton}" Grid.Column="2" VerticalAlignment="Center" Foreground="Black"/>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+                <Grid Grid.Column="1" Margin="25,10,0,0">
+                    <Border CornerRadius="1" VerticalAlignment="Stretch" HorizontalAlignment="Left" Width="2" Background="#FF3E3E3E"/>
+                    <TextBlock Text="{StaticResource arrangementEditZones}" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Foreground="Gainsboro" FontSize="16"/>
+                    <Grid Width="64" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="64"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="64"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="64"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="64"/>
+                        </Grid.RowDefinitions>
+                        <Button x:Name="Btn_TopSide" Cursor="Hand" Padding="10,5" Grid.Row="0"  Background="#FF3E3E3E" Style="{DynamicResource ButtonStyle1}" Click="Btn_TopSide_Click">
+                            <Viewbox Width="32" Height="32" Stretch="Uniform">
+                                <Canvas Width="24" Height="24">
+                                    <Path Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M 3 4 C 3 4.55 3.45 5 4 5 H 20 C 20.55 5 21 4.55 21 4 21 3.45 20.55 3 20 3 H 4 C 3.45 3 3 3.45 3 4 Z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path Fill="#FF606060">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M 7 21 H 9 V 19 H 7 Z m 4 -8 h 2 v -2 h -2 z m 0 8 h 2 V 19 H 11 Z M 3 17 H 5 V 15 H 3 Z m 0 4 H 5 V 19 H 3 Z M 3 13 H 5 V 11 H 3 Z M 3 9 H 5 V 7 H 3 Z m 16 0 h 2 V 7 h -2 z m 0 4 h 2 v -2 h -2 z m 0 4 h 2 v -2 h -2 z m -4 4 h 2 v -2 h -2 z m 4 0 h 2 v -2 h -2 z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                </Canvas>
+                            </Viewbox>
+                        </Button>
+                        <Button x:Name="Btn_BottomSide" Cursor="Hand" Padding="10,5" Grid.Row="2"  Background="#FF3E3E3E" Style="{DynamicResource ButtonStyle1}" Click="Btn_BottomSide_Click">
+                            <Viewbox Width="32" Height="32" Stretch="Uniform">
+                                <Canvas Width="24" Height="24" RenderTransformOrigin="0.5,0.5">
+                                    <Canvas.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="180"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Canvas.RenderTransform>
+                                    <Path Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M 3 4 C 3 4.55 3.45 5 4 5 H 20 C 20.55 5 21 4.55 21 4 21 3.45 20.55 3 20 3 H 4 C 3.45 3 3 3.45 3 4 Z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path Fill="#FF606060">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M 7 21 H 9 V 19 H 7 Z m 4 -8 h 2 v -2 h -2 z m 0 8 h 2 V 19 H 11 Z M 3 17 H 5 V 15 H 3 Z m 0 4 H 5 V 19 H 3 Z M 3 13 H 5 V 11 H 3 Z M 3 9 H 5 V 7 H 3 Z m 16 0 h 2 V 7 h -2 z m 0 4 h 2 v -2 h -2 z m 0 4 h 2 v -2 h -2 z m -4 4 h 2 v -2 h -2 z m 4 0 h 2 v -2 h -2 z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                </Canvas>
+                            </Viewbox>
+                        </Button>
+                        <Button x:Name="Btn_LeftSide" Cursor="Hand" Grid.Row="4" Padding="10,5" Grid.Column="0" Background="#FF3E3E3E" Style="{DynamicResource ButtonStyle1}" Foreground="White" Click="Btn_LeftSide_Click">
+                            <Viewbox Width="32" Height="32" Stretch="Uniform">
+                                <Canvas Width="24" Height="24" RenderTransformOrigin="0.5,0.5">
+                                    <Canvas.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="-90"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Canvas.RenderTransform>
+                                    <Path Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M 3 4 C 3 4.55 3.45 5 4 5 H 20 C 20.55 5 21 4.55 21 4 21 3.45 20.55 3 20 3 H 4 C 3.45 3 3 3.45 3 4 Z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path Fill="#FF606060">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M 7 21 H 9 V 19 H 7 Z m 4 -8 h 2 v -2 h -2 z m 0 8 h 2 V 19 H 11 Z M 3 17 H 5 V 15 H 3 Z m 0 4 H 5 V 19 H 3 Z M 3 13 H 5 V 11 H 3 Z M 3 9 H 5 V 7 H 3 Z m 16 0 h 2 V 7 h -2 z m 0 4 h 2 v -2 h -2 z m 0 4 h 2 v -2 h -2 z m -4 4 h 2 v -2 h -2 z m 4 0 h 2 v -2 h -2 z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                </Canvas>
+                            </Viewbox>
+                        </Button>
+                        <Button x:Name="Btn_RightSide" Cursor="Hand" Padding="10,5" Grid.Row="6"  Background="#FF3E3E3E" Style="{DynamicResource ButtonStyle1}" Click="Btn_RightSide_Click">
+                            <Viewbox Width="32" Height="32" Stretch="Uniform">
+                                <Canvas Width="24" Height="24" RenderTransformOrigin="0.5,0.5">
+                                    <Canvas.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="90"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Canvas.RenderTransform>
+                                    <Path Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M 3 4 C 3 4.55 3.45 5 4 5 H 20 C 20.55 5 21 4.55 21 4 21 3.45 20.55 3 20 3 H 4 C 3.45 3 3 3.45 3 4 Z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path Fill="#FF606060">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M 7 21 H 9 V 19 H 7 Z m 4 -8 h 2 v -2 h -2 z m 0 8 h 2 V 19 H 11 Z M 3 17 H 5 V 15 H 3 Z m 0 4 H 5 V 19 H 3 Z M 3 13 H 5 V 11 H 3 Z M 3 9 H 5 V 7 H 3 Z m 16 0 h 2 V 7 h -2 z m 0 4 h 2 v -2 h -2 z m 0 4 h 2 v -2 h -2 z m -4 4 h 2 v -2 h -2 z m 4 0 h 2 v -2 h -2 z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                </Canvas>
+                            </Viewbox>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+        </Border>
+
+    </Grid>
+</Window>

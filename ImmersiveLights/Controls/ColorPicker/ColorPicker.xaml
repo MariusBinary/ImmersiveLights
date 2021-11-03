@@ -1,0 +1,251 @@
+﻿<UserControl x:Class="ImmersiveLights.Controls.ColorPicker.ColorPicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ImmersiveLights.Controls.ColorPicker"
+             xmlns:conv="clr-namespace:ImmersiveLights.Controls.ColorPicker"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="400" d:DataContext="{x:Type local:ColorPicker}" Loaded="ColorPicker_Loaded">
+    <UserControl.Resources>
+        <conv:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter" />
+        <DrawingBrush  x:Key="CheckerBrush" Viewport="0,0,10,10" ViewportUnits="Absolute" TileMode="Tile">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <GeometryDrawing Brush="White">
+                        <GeometryDrawing.Geometry>
+                            <RectangleGeometry Rect="0,0 100,100" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="LightGray">
+                        <GeometryDrawing.Geometry>
+                            <GeometryGroup>
+                                <RectangleGeometry Rect="0,0 50,50" />
+                                <RectangleGeometry Rect="50,50 50,50" />
+                            </GeometryGroup>
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+        <Style x:Key="SliderRepeatButtonEDT" TargetType="RepeatButton">
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border CornerRadius="0,13,13,0" BorderThickness="0" BorderBrush="Black" Height="28" Background="{TemplateBinding Background}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SliderRepeatButton1EDT" TargetType="RepeatButton">
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border CornerRadius="13,0,0,13" BorderThickness="0" BorderBrush="Black" Height="28" Background="{TemplateBinding Background}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SliderThumbEDT" TargetType="Thumb">
+            <Setter Property="Focusable" Value="false" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Border CornerRadius="100" Height="28" Width="28" Background="{TemplateBinding Background}" Effect="{DynamicResource z-depth0}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="SliderStyleTEMP" TargetType="Slider">
+            <Border CornerRadius="14" ClipToBounds="True" Background="{TemplateBinding Background}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Track Grid.Row="1" x:Name="PART_Track">
+                        <Track.DecreaseRepeatButton>
+                            <RepeatButton Style="{StaticResource SliderRepeatButton1EDT}" Margin="0,0,-14,0" Background="Transparent" Command="Slider.DecreaseLarge" />
+                        </Track.DecreaseRepeatButton>
+                        <Track.IncreaseRepeatButton>
+                            <RepeatButton Style="{StaticResource SliderRepeatButtonEDT}" Margin="-14,0,0,0" Background="Transparent" Command="Slider.IncreaseLarge" />
+                        </Track.IncreaseRepeatButton>
+                        <Track.Thumb>
+                            <Thumb Style="{StaticResource SliderThumbEDT}" />
+                        </Track.Thumb>
+                    </Track>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+        <Style x:Key="SliderStyleEDITOR" TargetType="Slider">
+            <Setter Property="Focusable" Value="False"/>
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="Template" Value="{StaticResource SliderStyleTEMP}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="36"/>
+            <RowDefinition Height="2"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2"/>
+            <RowDefinition Height="34"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MaxWidth="200"/>
+            <ColumnDefinition Width="16"/>
+            <ColumnDefinition Width="1.6*"/>
+        </Grid.ColumnDefinitions>
+
+        <Viewbox Height="220" Grid.Row="0" Grid.RowSpan="5">
+            <Grid Width="200" Height="200">
+                <Canvas Width="200" Height="200" Name="CircleCanvas" MouseLeftButtonDown="CircleCanvas_MouseLeftButtonDown" MouseMove="CircleCanvas_MouseMove" MouseLeftButtonUp="CircleCanvas_MouseLeftButtonUp" SizeChanged="CircleCanvas_SizeChanged">
+                    <local:CirclePanel x:Name="panel" Width="200" Height="200" />
+                    <Canvas Name="ColorCircleSelector"
+                            Width="22"
+                            Height="22"
+                            IsHitTestVisible="False" Canvas.Top="99" Canvas.Left="198">
+                        <Ellipse Width="22"
+                               Height="22"
+                               StrokeThickness="2"
+                               Stroke="#FFF1F1F1"
+                               IsHitTestVisible="False" />
+                    </Canvas>
+                </Canvas>
+                <Border BorderThickness="1"
+                        BorderBrush="DarkGray"
+                        ClipToBounds="False"
+                        Background="{StaticResource CheckerBrush}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Canvas Name="ColorShadingCanvas" MouseLeftButtonDown="ColorShadingCanvas_MouseLeftButtonDown" MouseLeftButtonUp="ColorShadingCanvas_MouseLeftButtonUp" MouseMove="ColorShadingCanvas_MouseMove"
+                          Width="106"
+                          Height="106"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top" ClipToBounds="False">
+                        <Rectangle Name="ColorShadingRectangle"
+                               Height="{Binding ElementName=ColorShadingCanvas, Path=Height}"
+                               Width="{Binding ElementName=ColorShadingCanvas, Path=Width}"
+                               Fill="{Binding ShadingBaseColor}" />
+                        <Rectangle x:Name="WhiteGradient"
+                               Width="{Binding ElementName=ColorShadingCanvas,Path=Width}"
+                               Height="{Binding ElementName=ColorShadingCanvas,Path=Height}">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="1,0">
+                                    <GradientStop Offset="0"
+                                        Color="#ffffffff" />
+                                    <GradientStop Offset="1"
+                                        Color="Transparent" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle x:Name="BlackGradient"
+                               Width="{Binding ElementName=ColorShadingCanvas,Path=Width}"
+                               Height="{Binding ElementName=ColorShadingCanvas,Path=Height}">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0,1"
+                                             EndPoint="0, 0">
+                                    <GradientStop Offset="0"
+                                        Color="#ff000000" />
+                                    <GradientStop Offset="1"
+                                        Color="#00000000" />
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Canvas x:Name="ColorShadeSelector"
+                            Width="13"
+                            Height="13"
+                            IsHitTestVisible="False">
+                            <Ellipse Width="13"
+                               Height="13"
+                               StrokeThickness="1.5"
+                               Stroke="#FF444444"
+                               IsHitTestVisible="False" />
+                        </Canvas>
+                    </Canvas>
+                </Border>
+            </Grid>
+        </Viewbox>
+
+        <DockPanel Margin="5,0,0,0" Grid.Column="2" VerticalAlignment="Center" Grid.Row="0">
+            <Border x:Name="Tab_AddToFavouritesWrapper" CornerRadius="5" Width="78" Height="35" DockPanel.Dock="Right" BorderThickness="2" Background="{Binding SelectedColor, Converter={StaticResource ColorToSolidColorBrushConverter}}" VerticalAlignment="Top" Grid.Column="2" BorderBrush="#FF2B2C33">
+                <Grid x:Name="Tab_AddToFavourites" Visibility="Collapsed">
+                    <Button x:Name="Btn_AddToFavourites" Visibility="Visible" BorderThickness="0" DockPanel.Dock="Left" Background="#33000000" BorderBrush="#FF2B2C33" Click="Btn_AddToFavourites_Click" Margin="0,0,104.667,-0.333">
+                        <Path Stretch="Uniform" Width="14" Height="14" Data="M17.59 3.59c-.38-.38-.89-.59-1.42-.59H5c-1.11 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7.83c0-.53-.21-1.04-.59-1.41l-2.82-2.83zM12 19c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm1-10H7c-1.1 0-2-.9-2-2s.9-2 2-2h6c1.1 0 2 .9 2 2s-.9 2-2 2z" Fill="White"/>
+                    </Button>
+                    <Grid Width="2" HorizontalAlignment="Left" Margin="29,0,0,0" Background="#FF2B2C33"/>
+                </Grid>
+            </Border>
+            <TextBlock Text="{StaticResource colorPickerColor}" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" FontWeight="Bold" FontSize="16"/>
+        </DockPanel>
+
+        <Grid Height="2" Grid.Column="2" Background="#FF2B2C33" Grid.Row="1"/>
+
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Name="SliderStackPanel" Grid.Column="2" Grid.Row="2">
+            <DockPanel Margin="5,0,0,0">
+                <TextBlock Text="R" DockPanel.Dock="Left" VerticalAlignment="Center" Width="10" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                <TextBox Text="{Binding R}" Height="28" Width="45" DockPanel.Dock="Right" VerticalContentAlignment="Center" VerticalAlignment="Stretch" Padding="0" Name="RTextBox"/>
+                <Border  Margin="8,0,5,0">
+                    <Slider x:Name="Seek_R" MouseLeftButtonDown="SliderCanvas_MouseLeftButtonDown" Maximum="255"  MouseLeftButtonUp="SliderCanvas_MouseLeftButtonUp" MouseMove="SliderCanvas_MouseMove" Style="{DynamicResource SliderStyleEDITOR}">
+                        <Slider.Background>
+                            <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="1,0">
+                                <GradientStop Offset="0"
+                                        Color="{Binding RDarkColor}" />
+                                <GradientStop Offset="1"
+                                        Color="{Binding RLightColor}" />
+                            </LinearGradientBrush>
+                        </Slider.Background>
+                    </Slider>
+                </Border>
+            </DockPanel>
+            <DockPanel Margin="5,10,0,0">
+                <TextBlock Text="G" DockPanel.Dock="Left" VerticalAlignment="Center" Width="10" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                <TextBox Text="{Binding G}" Height="28" Width="45" DockPanel.Dock="Right" VerticalContentAlignment="Center" VerticalAlignment="Stretch" Padding="0" Name="GTextBox"/>
+                <Border Margin="8,0,5,0">
+                    <Slider x:Name="Seek_G" MouseLeftButtonDown="SliderCanvas_MouseLeftButtonDown" Maximum="255" MouseLeftButtonUp="SliderCanvas_MouseLeftButtonUp" MouseMove="SliderCanvas_MouseMove" Style="{DynamicResource SliderStyleEDITOR}">
+                        <Slider.Background>
+                            <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="1,0">
+                                <GradientStop Offset="0"
+                                        Color="{Binding GDarkColor}" />
+                                <GradientStop Offset="1"
+                                        Color="{Binding GLightColor}" />
+                            </LinearGradientBrush>
+                        </Slider.Background>
+                    </Slider>
+                </Border>
+            </DockPanel>
+            <DockPanel Margin="5,10,0,0">
+                <TextBlock Text="B" DockPanel.Dock="Left" VerticalAlignment="Center" Width="10" Foreground="White" FontWeight="Bold" FontSize="16"/>
+                <TextBox Text="{Binding B}" Height="28" Width="45" DockPanel.Dock="Right" VerticalContentAlignment="Center" VerticalAlignment="Stretch" Padding="0" Name="BTextBox"/>
+                <Border Margin="8,0,5,0">
+                    <Slider x:Name="Seek_B" MouseLeftButtonDown="SliderCanvas_MouseLeftButtonDown" Maximum="255"  MouseLeftButtonUp="SliderCanvas_MouseLeftButtonUp" MouseMove="SliderCanvas_MouseMove" Style="{DynamicResource SliderStyleEDITOR}">
+                        <Slider.Background>
+                            <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="1,0">
+                                <GradientStop Offset="0"
+                                        Color="{Binding BDarkColor}" />
+                                <GradientStop Offset="1"
+                                        Color="{Binding BLightColor}" />
+                            </LinearGradientBrush>
+                        </Slider.Background>
+                    </Slider>
+                </Border>
+            </DockPanel>
+        </StackPanel>
+
+        <Grid Height="2" Grid.Column="2" Background="#FF2B2C33" Grid.Row="3"/>
+
+        <DockPanel Margin="5,0,0,0" Grid.Column="2" VerticalAlignment="Center" Grid.Row="4">
+            <TextBox Text="#FFFF0000" Height="28" Name="HexTextBox" DockPanel.Dock="Right" LostFocus="HexTextBox_LostFocus" VerticalAlignment="Stretch"/>
+            <TextBlock Text="{StaticResource colorPickerHexadecimal}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="16"/>
+        </DockPanel>
+    </Grid>
+</UserControl>

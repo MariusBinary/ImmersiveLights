@@ -1,0 +1,214 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!--App-->
+    <system:String x:Key="appTitle">Immersive Lights</system:String>
+    <system:String x:Key="appDescription">Immersive is a software designed for the management of LED strips connected behind the monitor.</system:String>
+
+    <!--General-->
+    <system:String x:Key="connectButton">Connect</system:String>
+    <system:String x:Key="disconnectButton">Disconnect</system:String>
+    
+    <!--Navigation Bar-->
+    <system:String x:Key="sidebarGeneral">GENERAL</system:String>
+    <system:String x:Key="sidebarPreferences">PREFERENCES</system:String>
+    <system:String x:Key="sidebarOther">OTHER</system:String>
+    <system:String x:Key="sidebarHome">Home</system:String>
+    <system:String x:Key="sidebarConnection">Connection</system:String>
+    <system:String x:Key="sidebarArrangement">Arrangement</system:String>
+    <system:String x:Key="sidebarColorCorrection">Color correction</system:String>
+    <system:String x:Key="sidebarCapturePreferences">Capture preferences</system:String>
+    <system:String x:Key="sidebarAudioPreferences">Audio preferences</system:String>
+    <system:String x:Key="sidebarSystemSettings">System settings</system:String>
+    <system:String x:Key="sidebarCheckForUpdates">Check for updates</system:String>
+    <system:String x:Key="sidebarAbout">About</system:String>
+    <system:String x:Key="navbarHome">Home</system:String>
+    <system:String x:Key="navbarConnection">Connection</system:String>
+    <system:String x:Key="navbarArrangement">Arrangement</system:String>
+    <system:String x:Key="navbarColorCorrection">Color correction</system:String>
+    <system:String x:Key="navbarCapturePreferences">Capture preferences</system:String>
+    <system:String x:Key="navbarAudioPreferences">Audio preferences</system:String>
+    <system:String x:Key="navbarSystemSettings">System settings</system:String>
+    <system:String x:Key="navbarCheckForUpdates">Check for updates</system:String>
+    <system:String x:Key="navbarAbout">About</system:String>
+    
+    <!--Menu-->
+    <system:String x:Key="menuSettingsTitle">Settings</system:String>
+    <system:String x:Key="menuSettingsDescription">User general preferences.</system:String>
+    <system:String x:Key="menuConnected">Connected</system:String>
+    <system:String x:Key="menuDisconnected">Disconnected</system:String>
+    <system:String x:Key="menuUnknown">Unknown</system:String>
+
+    <!--Home Frame-->
+    <system:String x:Key="homeItemBrightnessTitle">Lights</system:String>
+    <system:String x:Key="homeItemBrightnessDescription">Set the maximum brightness level that the LEDs will output or turn on/off all the lights directly.</system:String>
+    <system:String x:Key="homeItemColorTitle">Color</system:String>
+    <system:String x:Key="homeItemScenesTitle">Scenes</system:String>
+    <system:String x:Key="homeItemMusicTitle">Music</system:String>
+    <system:String x:Key="homeItemAmbilightTitle">Ambilight</system:String>
+    
+    <!--Connection Frame-->
+    <system:String x:Key="connectionItemConnectionTypeTitle">Connection type</system:String>
+    <system:String x:Key="connectionItemConnectionTypeDescription">Select the type of connection with the device.</system:String>
+    <system:String x:Key="connectionItemDeviceUsbParam1Title">Device port</system:String>
+    <system:String x:Key="connectionItemDeviceUsbParam1Description">Select the serial port (COM) for communication with the device.</system:String>
+    <system:String x:Key="connectionItemDeviceUsbParam2Title">Communication speed</system:String>
+    <system:String x:Key="connectionItemDeviceUsbParam2Description">Set a communication speed (baud) with the device.</system:String>
+    <system:String x:Key="connectionItemDeviceLanParam1Title">Device IP address</system:String>
+    <system:String x:Key="connectionItemDeviceLanParam1Description">Set the IP address of the device.</system:String>
+    <system:String x:Key="connectionItemDeviceLanParam2Title">Device port</system:String>
+    <system:String x:Key="connectionItemDeviceLanParam2Description">Set the port of the device.</system:String>
+    <x:Array x:Key="connectionTypes" Type="{x:Type system:String}">
+        <system:String>USB (Connected directly to PC)</system:String>
+        <system:String>LAN (Connected to a network device e.g. switch/router)</system:String>
+        <system:String>VIRTUAL (Simulate the LEDs output)</system:String>
+    </x:Array>
+
+    <!--Arrangement Frame-->
+    <system:String x:Key="arrangementEditZones">Edit zone:</system:String>
+    <system:String x:Key="arrangementLeftLEDs">Left LEDs</system:String>
+    <system:String x:Key="arrangementRightLEDs">Right LEDs</system:String>
+    <system:String x:Key="arrangementTopLEDs">Top LEDs</system:String>
+    <system:String x:Key="arrangementBottomLEDs">Bottom LEDs</system:String>
+    <system:String x:Key="arrangementBeginEdge">Begin edge</system:String>
+    <system:String x:Key="arrangementOrientation">Orientation</system:String>
+    <x:Array x:Key="arrangementBeginEdges" Type="{x:Type system:String}">
+        <system:String>Top left</system:String>
+        <system:String>Top right</system:String>
+        <system:String>Bottom right</system:String>
+        <system:String>Bottom left</system:String>
+    </x:Array>
+    <x:Array x:Key="arrangementOrientations" Type="{x:Type system:String}">
+        <system:String>Clockwise</system:String>
+        <system:String>Counterclockwise</system:String>
+    </x:Array>
+    <system:String x:Key="arrangementLeftMargin">Left Margin</system:String>
+    <system:String x:Key="arrangementRightMargin">Right Margin</system:String>
+    <system:String x:Key="arrangementTopMargin">Top Margin</system:String>
+    <system:String x:Key="arrangementBottomMargin">Bottom Margin</system:String>
+    <system:String x:Key="arrangementThickness">Thickness</system:String>
+    <system:String x:Key="arrangementEnabled">Enabled</system:String>
+    <system:String x:Key="arrangementTip">TIP:</system:String>
+    <system:String x:Key="arrangementTipContent">Click on the single zones to enable or disable them.</system:String>
+    <system:String x:Key="arrangementApplyButton">Apply changes</system:String>
+    <system:String x:Key="arrangementSaveButton">Save</system:String>
+
+    <!--Color Correction Frame-->
+    <system:String x:Key="colorCorrectionItemColorCorrectionTitle">Color correction</system:String>
+    <system:String x:Key="colorCorrectionItemColorCorrectionDescription">Choose whether or not to enable color correction.</system:String>
+    <system:String x:Key="colorCorrectionItemReferenceColorTitle">Reference color</system:String>
+    <system:String x:Key="colorCorrectionItemReferenceColorDescription">Choose a reference color.</system:String>
+    <system:String x:Key="colorCorrectionItemGammaCorrectionTitle">Gamma correction</system:String>
+    <system:String x:Key="colorCorrectionItemGammaCorrectionDescription">This allows you to apply Gamma correction to the output.</system:String>
+    <system:String x:Key="colorCorrectionItemRGBCorrectionTitle">RGB correction</system:String>
+    <system:String x:Key="colorCorrectionItemRGBCorrectionDescription">This allows you to apply nonlinear correction on separate RGB channels.</system:String>
+    <system:String x:Key="colorCorrectionCancelButton">Cancel</system:String>
+    <system:String x:Key="colorCorrectionSaveButton">Save</system:String>
+
+    <!--Audio Preferences Frame-->
+    <system:String x:Key="audioPreferencesItemInputDeviceTitle">Input device</system:String>
+    <system:String x:Key="audioPreferencesItemInputDeviceDescription">This allows you to apply Gamma correction to the output.</system:String>
+    <system:String x:Key="audioPreferencesItemSamplingRateTitle">Sampling rate</system:String>
+    <system:String x:Key="audioPreferencesItemSamplingRateDescription">Configure the connection parameters with the serial device.</system:String>
+    <system:String x:Key="audioPreferencesItemVolumeSensibilityTitle">Volume sensibility</system:String>
+    <system:String x:Key="audioPreferencesItemVolumeSensibilityDescription">It amplifies the audio output.</system:String>
+    <system:String x:Key="audioPreferencesDefaultName">Default</system:String>
+    <x:Array x:Key="audioPreferencesSamplignRates" Type="{x:Type system:String}">
+        <system:String>High (The most perfomant and immediate, but it will use a high number of resources) (Reccomanded)</system:String>
+        <system:String>Medium (Output is not immediate but resource usage is reduced)</system:String>
+        <system:String>Low (The capture will use a very low sampling rate)</system:String>
+    </x:Array>
+
+    <!--Capture Preferences Frame-->
+    <system:String x:Key="capturePreferencesItemDisplayToCaptureTitle">Display to capture</system:String>
+    <system:String x:Key="capturePreferencesItemDisplayToCaptureDescription">Select the display to capture.</system:String>
+    <system:String x:Key="capturePreferencesItemCaptureFramerateTitle">Capture framerate</system:String>
+    <system:String x:Key="capturePreferencesItemCaptureFramerateDescription">Select a capture framerate based on your preferences or the capabilities of your PC.</system:String>
+    <system:String x:Key="capturePreferencesItemLEDTransitionSpeedTitle">LED transition speed</system:String>
+    <system:String x:Key="capturePreferencesItemLEDTransitionSpeedDescription">It's sometimes distracting if LEDs instantaneously track screen contents (such as during bright flashing sequences), so this feature enables a gradual fade to each new LED state. Higher numbers yield slower transitions (max of 255), or set to 0 to disable this feature (immediate transition of all LEDs)</system:String>
+    <system:String x:Key="capturePreferencesItemMinimumBrightnessTitle">Minimum brightness</system:String>
+    <system:String x:Key="capturePreferencesItemMinimumBrightnessDescription">Some users prefer a small amount of backlighting at all times, regardless of screen content. Higher values are brighter, or set to 0 to disable this feature.</system:String>
+    <x:Array x:Key="capturePreferencesCaptureFramerates" Type="{x:Type system:String}">
+        <system:String>High (The most perfomant and immediate, but it will use a high number of resources) (Reccomanded)</system:String>
+        <system:String>Medium (Output is not immediate but resource usage is reduced)</system:String>
+        <system:String>Low (The capture will use a very low sampling rate)</system:String>
+    </x:Array>
+
+    <!--Settings Frame-->
+    <system:String x:Key="settingsItemStartAtStartupTitle">Run at startup</system:String>
+    <system:String x:Key="settingsItemStartAtStartupDescription">Allow Immersive Lights to immediately create an atmosphere of lights and colors when starting windows.</system:String>
+    <system:String x:Key="settingsItemStartMinimizedTitle">Start minimized</system:String>
+    <system:String x:Key="settingsItemStartMinimizedDescription">Immersive Lights will start in the background and will avoid annoying and burdening the operating system.</system:String>
+    <system:String x:Key="settingsItemMinimizeToTryTitle">Minimize to tray</system:String>
+    <system:String x:Key="settingsItemMinimizeToTryDescription">Let the Immersive Lights continue to do its job even when the close button is mistakenly pressed.</system:String>
+
+    <!--Updates Frame-->
+    <system:String x:Key="updatesCheckForUpdatesButton">Check for updates</system:String>
+    <system:String x:Key="updatesDownloadButton">Download the lastest version</system:String>
+    <system:String x:Key="updatesCurrentVersion">Current version:</system:String>
+    <system:String x:Key="updatesStatusUpdated">(Updated)</system:String>
+    <system:String x:Key="updatesStatusChecking">(Searching for updates...)</system:String>
+    <system:String x:Key="updatesStatusOutdated">(New version available)</system:String>
+    
+    <!--ColorPicker-->
+    <system:String x:Key="colorPickerColor">Color</system:String>
+    <system:String x:Key="colorPickerHexadecimal">Hexadecimal</system:String>
+
+    <!--Color Effect-->
+    <system:String x:Key="effectSavedColors">Saved colors</system:String>
+
+    <!--Scenes Effect-->
+    <system:String x:Key="effectSelectScene">Select a scene</system:String>
+    
+    <!--Music Effect-->
+    <system:String x:Key="effectFrequencyFilter">Frequencies to react to</system:String>
+    <system:String x:Key="effectLowFilter">Low</system:String>
+    <system:String x:Key="effectMediumFilter">Medium</system:String>
+    <system:String x:Key="effectHighFilter">High</system:String>
+    <system:String x:Key="effectSelectEffect">Select effect</system:String>
+    <system:String x:Key="effectSelectColor">Select color</system:String>
+    <x:Array x:Key="effectMusicEffects" Type="{x:Type system:String}">
+        <system:String>Solid color</system:String>
+        <system:String>Color cycle</system:String>
+    </x:Array>
+    
+    <!--Ambilight Effect-->
+    <system:String x:Key="effectArrangementQuestion">Are the capture zones not mapped correctly?</system:String>
+    <system:String x:Key="effectArrangementSolution">Change the arrangement</system:String>
+
+    <!--Virtual Screen Page-->
+    <system:String x:Key="virutalScreenTitle">Virtual Screen</system:String>
+
+    <!--Alert Messages-->
+    <system:String x:Key="alertColorCorrectionDenialTitle">The color cannot be corrected!</system:String>
+    <system:String x:Key="alertColorCorrectionDenialDescription">Per poter eseguire la calibrazione dei colori è necessario che la scheda di ricezione sia collegata.</system:String>
+    <system:String x:Key="alertArrangementDenialTitle">It's not possible to change the arrangement!</system:String>
+    <system:String x:Key="alertArrangementDenialDescription">It is not possible to change the arrangement as long as the device is connected to the coupon. Disconnect it and try again!</system:String>
+    <system:String x:Key="alertChangeAudioDenialTitle">Input device can't be changed</system:String>
+    <system:String x:Key="alertChangeAudioDenialDescription">It is not possible to change the input audio device when the effect is running. Select another effect or disconnect and then try again.</system:String>
+    <system:String x:Key="alertChangeDisplayDenialTitle">Input device can't be changed</system:String>
+    <system:String x:Key="alertChangeDisplayDenialDescription">It is not possible to change the input audio device when the effect is running. Select another effect or disconnect and then try again.</system:String>
+    <system:String x:Key="alertConnectionErrorTitle">Connection Error!</system:String>
+    <system:String x:Key="alertConnectionErrorDescription">It was not possible to connect with the device, please check that the connection parameters have been set correctly.</system:String>
+    <system:String x:Key="alertSceneInputNameTitle">Enter the name of the scene:</system:String>
+    <system:String x:Key="alertSceneInputNameDescription">Scene #{0}</system:String>
+    <system:String x:Key="alertSceneLoadErrorTitle">Image loading error!</system:String>
+    <system:String x:Key="alertSceneLoadErrorDescription">Cannot load image: {0}</system:String>
+    <system:String x:Key="alertOkButton">Ok</system:String>
+    <system:String x:Key="alertYesButton">Yes</system:String>
+    <system:String x:Key="alertNoButton">No</system:String>
+    <system:String x:Key="alertCancelButton">Cancel</system:String>
+
+    <!--Balloon Tips-->
+    <system:String x:Key="balloonTipRunningInBackgroundTitle">Immersive light is still running!</system:String>
+    <system:String x:Key="balloonTipRunningInBackgroundDescription">Immersive light will continue to run in the background to not interrupt the execution of effects even if the window has been closed.</system:String>
+    
+    <!--Notification Menu-->
+    <system:String x:Key="notifyOpen">Open</system:String>
+    <system:String x:Key="notifySystemSettings">System settings</system:String>
+    <system:String x:Key="notifyCheckForUpdates">Check for updates</system:String>
+    <system:String x:Key="notifyAbout">About</system:String>
+    <system:String x:Key="notifyClose">Close</system:String>
+</ResourceDictionary>
